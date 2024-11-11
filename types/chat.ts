@@ -3,4 +3,4 @@ export interface Message {
   content: string;
 }
 
-export type Personality = 'Smooth' | 'Playful' | 'Poetic' | 'Mysterious';
+export type Personality = 'Smooth' | 'Flirty' | 'Sigma' | 'Poetic' | 'Mysterious';

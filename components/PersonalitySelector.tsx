@@ -1,7 +1,7 @@
-import { Personality } from '@/types/chat';
+import { Sparkles, Laugh, Crown, BookHeart, Glasses } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sparkles, Laugh, BookHeart, Glasses } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Personality } from '@/types/chat';
 
 interface PersonalitySelectorProps {
   selected: string;
@@ -23,6 +23,13 @@ export function PersonalitySelector({ selected, onSelect }: PersonalitySelectorP
       label: 'Flirty',
       gradient: 'from-pink-400 via-rose-500 to-red-500',
       glow: 'shadow-pink-500/50'
+    },
+    { 
+      id: 'Sigma',
+      icon: <Crown className="w-4 h-4" />,
+      label: 'Sigma rizz',
+      gradient: 'from-amber-400 via-orange-500 to-yellow-500',
+      glow: 'shadow-amber-500/50'
     },
     { 
       id: 'Poetic',
