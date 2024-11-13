@@ -58,36 +58,40 @@ export function PersonalitySelector({ selected, onSelect }: PersonalitySelectorP
   const selectedPersonality = personalities.find(p => p.id === selected);
 
   return (
-    <>
+    <div className="container mx-auto px-4 max-w-screen-xl">
       {/* Mobile Dropdown */}
-      <div className="sm:hidden flex justify-center p-2">
+      <div className="sm:hidden flex justify-center">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               className={cn(
-                'relative flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300',
+                'relative flex items-center justify-between w-full max-w-[200px] px-4 py-2 rounded-full',
+                'transition-all duration-300',
                 `bg-gradient-to-r ${selectedPersonality?.gradient} text-white shadow-md ${selectedPersonality?.glow}`
               )}
             >
-              <span className="flex items-center gap-2 font-medium">
+              <span className="flex items-center gap-2">
                 {selectedPersonality?.icon}
-                {selectedPersonality?.label}
+                <span className="font-medium">{selectedPersonality?.label}</span>
               </span>
-              <ChevronDown className="w-4 h-4 ml-1" />
+              <ChevronDown className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="center" className="w-48">
+          <DropdownMenuContent 
+            align="center"
+            className="w-[200px] bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border-none shadow-lg"
+          >
             {personalities.map(({ id, icon, label, gradient }) => (
               <DropdownMenuItem
                 key={id}
                 onClick={() => onSelect(id as Personality)}
                 className={cn(
-                  'flex items-center gap-2',
+                  'flex items-center gap-2 px-3 py-2.5 cursor-pointer',
                   selected === id && `bg-gradient-to-r ${gradient} text-white`
                 )}
               >
                 {icon}
-                {label}
+                <span>{label}</span>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -95,7 +99,7 @@ export function PersonalitySelector({ selected, onSelect }: PersonalitySelectorP
       </div>
 
       {/* Desktop Buttons */}
-      <div className="hidden sm:flex justify-center gap-3 p-2">
+      <div className="hidden sm:flex justify-center gap-3">
         {personalities.map(({ id, icon, label, gradient, glow }) => (
           <Button
             key={id}
@@ -115,6 +119,6 @@ export function PersonalitySelector({ selected, onSelect }: PersonalitySelectorP
           </Button>
         ))}
       </div>
-    </>
+    </div>
   );
 }
