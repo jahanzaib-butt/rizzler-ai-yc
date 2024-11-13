@@ -92,7 +92,7 @@ export default function ChatInterface() {
           </div>
           
           <h1 className="text-5xl sm:text-7xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-transparent bg-clip-text relative animate-gradient-xy">
-            RizzGPT
+            Rizzler Ai
           </h1>
           <p className="text-gray-500 dark:text-gray-400 text-lg relative">
             Your AI-powered conversation companion
