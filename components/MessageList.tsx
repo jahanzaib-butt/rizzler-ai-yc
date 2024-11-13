@@ -59,18 +59,18 @@ const formatMessage = (content: string) => {
 
 export function MessageList({ messages, isLoading }: MessageListProps) {
   return (
-    <div className="space-y-8 px-2">
+    <div className="space-y-4 sm:space-y-8 px-1 sm:px-2">
       {messages.map((message, index) => (
         <div
           key={index}
           className={cn(
-            'flex gap-4 text-base/relaxed',
+            'flex gap-2 sm:gap-4 text-sm sm:text-base/relaxed',
             message.role === 'user' ? 'justify-end' : 'justify-start'
           )}
         >
           {message.role === 'assistant' && (
             <div className="flex-shrink-0">
-              <div className="relative h-10 w-10">
+              <div className="relative h-8 w-8 sm:h-10 sm:w-10">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-violet-500 to-purple-700 animate-pulse" />
                 <div className="absolute inset-[2px] rounded-full bg-white dark:bg-gray-900 flex items-center justify-center">
                   <Bot className="h-5 w-5 text-violet-500" />
@@ -82,11 +82,11 @@ export function MessageList({ messages, isLoading }: MessageListProps) {
 
           <div
             className={cn(
-              'group relative max-w-[85%] rounded-3xl px-6 py-5 text-[15px]',
+              'group relative max-w-[90%] sm:max-w-[85%] rounded-2xl sm:rounded-3xl px-4 sm:px-6 py-3 sm:py-5 text-sm sm:text-[15px]',
               'hover:shadow-lg hover:-translate-y-1',
               message.role === 'user'
-                ? 'bg-gradient-to-br from-violet-500 to-purple-600 text-white ml-12'
-                : 'bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-violet-100/20 dark:border-violet-900/20 mr-12'
+                ? 'bg-gradient-to-br from-violet-500 to-purple-600 text-white ml-8 sm:ml-12'
+                : 'bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-violet-100/20 dark:border-violet-900/20 mr-8 sm:mr-12'
             )}
           >
             <div className="relative z-10">
@@ -129,7 +129,7 @@ export function MessageList({ messages, isLoading }: MessageListProps) {
 
           {message.role === 'user' && (
             <div className="flex-shrink-0">
-              <div className="relative h-10 w-10">
+              <div className="relative h-8 w-8 sm:h-10 sm:w-10">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-600 to-purple-700" />
                 <div className="absolute inset-[2px] rounded-full bg-white dark:bg-gray-900 flex items-center justify-center">
                   <User className="h-5 w-5 text-violet-600" />

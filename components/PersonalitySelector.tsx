@@ -1,7 +1,15 @@
-import { Sparkles, Laugh, Crown, BookHeart, Glasses } from 'lucide-react';
+"use client";
+
+import { Sparkles, Laugh, Crown, BookHeart, Glasses, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Personality } from '@/types/chat';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface PersonalitySelectorProps {
   selected: string;
@@ -47,26 +55,66 @@ export function PersonalitySelector({ selected, onSelect }: PersonalitySelectorP
     },
   ];
 
+  const selectedPersonality = personalities.find(p => p.id === selected);
+
   return (
-    <div className="flex justify-center gap-3 p-2">
-      {personalities.map(({ id, icon, label, gradient, glow }) => (
-        <Button
-          key={id}
-          onClick={() => onSelect(id as Personality)}
-          className={cn(
-            'relative flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300',
-            'hover:scale-105',
-            selected === id
-              ? `bg-gradient-to-r ${gradient} text-white shadow-md ${glow}` 
-              : 'bg-white/50 hover:bg-white/80 text-gray-600'
-          )}
-        >
-          <span className="flex items-center gap-2 font-medium">
-            {icon}
-            {label}
-          </span>
-        </Button>
-      ))}
-    </div>
+    <>
+      {/* Mobile Dropdown */}
+      <div className="sm:hidden flex justify-center p-2">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              className={cn(
+                'relative flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300',
+                `bg-gradient-to-r ${selectedPersonality?.gradient} text-white shadow-md ${selectedPersonality?.glow}`
+              )}
+            >
+              <span className="flex items-center gap-2 font-medium">
+                {selectedPersonality?.icon}
+                {selectedPersonality?.label}
+              </span>
+              <ChevronDown className="w-4 h-4 ml-1" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="center" className="w-48">
+            {personalities.map(({ id, icon, label, gradient }) => (
+              <DropdownMenuItem
+                key={id}
+                onClick={() => onSelect(id as Personality)}
+                className={cn(
+                  'flex items-center gap-2',
+                  selected === id && `bg-gradient-to-r ${gradient} text-white`
+                )}
+              >
+                {icon}
+                {label}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      {/* Desktop Buttons */}
+      <div className="hidden sm:flex justify-center gap-3 p-2">
+        {personalities.map(({ id, icon, label, gradient, glow }) => (
+          <Button
+            key={id}
+            onClick={() => onSelect(id as Personality)}
+            className={cn(
+              'relative flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300',
+              'hover:scale-105',
+              selected === id
+                ? `bg-gradient-to-r ${gradient} text-white shadow-md ${glow}` 
+                : 'bg-white/50 hover:bg-white/80 text-gray-600'
+            )}
+          >
+            <span className="flex items-center gap-2 font-medium">
+              {icon}
+              {label}
+            </span>
+          </Button>
+        ))}
+      </div>
+    </>
   );
 }
