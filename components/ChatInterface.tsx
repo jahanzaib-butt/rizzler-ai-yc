@@ -18,6 +18,15 @@ export default function ChatInterface() {
   const [personality, setPersonality] = useState<Personality>('Smooth');
   const { toast } = useToast();
 
+  const handlePersonalityChange = (newPersonality: Personality) => {
+    setPersonality(newPersonality);
+    toast({
+      title: `Switched to ${newPersonality} mode`,
+      description: "Continuing conversation with new personality.",
+      duration: 3000,
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const trimmedInput = input.trim();
@@ -73,20 +82,27 @@ export default function ChatInterface() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
-      <div className="container mx-auto px-4 max-w-screen-xl flex flex-col min-h-screen">
-        <div className="text-center space-y-2 py-4">
-          <h1 className="text-4xl sm:text-7xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-transparent bg-clip-text">
+      <div className="container max-w-6xl mx-auto p-4 flex flex-col h-screen">
+        <div className="text-center space-y-2 py-6 relative flex-shrink-0">
+          {/* Gradient orbs */}
+          <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-[600px] h-[200px] pointer-events-none">
+            <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-gradient-to-r from-purple-300/30 to-violet-400/30 blur-3xl rounded-full animate-pulse" />
+            <div className="absolute top-10 right-0 w-[250px] h-[250px] bg-gradient-to-r from-fuchsia-300/20 to-pink-400/20 blur-3xl rounded-full animate-pulse [animation-delay:0.5s]" />
+            <div className="absolute bottom-0 left-20 w-[200px] h-[200px] bg-gradient-to-r from-blue-300/20 to-indigo-400/20 blur-3xl rounded-full animate-pulse [animation-delay:1s]" />
+          </div>
+          
+          <h1 className="text-5xl sm:text-7xl font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-transparent bg-clip-text relative animate-gradient-xy">
             RizzGPT
           </h1>
-          <p className="text-gray-500 dark:text-gray-400">
+          <p className="text-gray-500 dark:text-gray-400 text-lg relative">
             Your AI-powered conversation companion
           </p>
         </div>
 
-        <div className="mb-4">
+        <div className="flex-shrink-0 mb-4">
           <PersonalitySelector 
             selected={personality}
-            onSelect={setPersonality}
+            onSelect={handlePersonalityChange}
           />
         </div>
 
